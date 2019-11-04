@@ -2,7 +2,6 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from .patterns import patterns
 import math
-import threading
 
 class Grid():
     cells = {
@@ -60,9 +59,8 @@ class Grid():
                 self.get_adjusted_id(x+1, y, len),
                 self.get_adjusted_id(x+1, y-1, len)]
 
-    def __init__(self):
-        print("cell init started!")
-        for id in range(2500):
+    def __init__(self, dim):
+        for id in range(dim*dim):
             self.cells[id] = {
                 'alive': False,
                 'red': 255,
@@ -70,12 +68,10 @@ class Grid():
                 'blue': 255
             }
         for id in self.cells:
-            neighbours = self.get_neighbours(id, 50)
+            neighbours = self.get_neighbours(id, dim)
             self.cells[id]['neighbours'] = []
             for neighbour in neighbours:
                 self.cells[id]['neighbours'].append(neighbour)
-        print("cell init completed!")
-        self.set_interval(self.update_and_send_cells, 1.0)
 
     def update_cells(self):
         nextCells = {}
@@ -137,11 +133,3 @@ class Grid():
     def update_and_send_cells(self):
         self.update_cells()
         self.send_updated_cells()
-
-    def set_interval(self, func, sec):
-        def func_wrapper():
-            self.set_interval(func, sec)
-            func()
-        t = threading.Timer(sec, func_wrapper)
-        t.start()
-        return t
