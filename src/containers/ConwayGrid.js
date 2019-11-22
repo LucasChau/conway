@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import Grid from '../components/Grid';
+import Grid from '../components/grid';
 import { requestActivateCell } from '../actions/action';
 
 const mapStateToProps = state => {
     return {
-        cells: state.conwayReducer.cells,
+        cells: state.cells,
     };
 }
 

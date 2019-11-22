@@ -5,16 +5,16 @@ from .models import Player
 from .grid import Grid
 import threading
 
-def set_interval(self, func, sec):
+def set_interval(func, sec):
     def func_wrapper():
-        self.set_interval(func, sec)
+        set_interval(func, sec)
         func()
     t = threading.Timer(sec, func_wrapper)
     t.start()
     return t
 
 grid = Grid(50)
-self.set_interval(grid.update_and_send_cells, 1.0)
+set_interval(grid.update_and_send_cells, 1.0)
 
 class ConwayConsumer(AsyncWebsocketConsumer):
 

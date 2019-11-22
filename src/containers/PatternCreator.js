@@ -4,7 +4,7 @@ import { requestCreatePattern } from '../actions/action';
 
 const mapStateToProps = state => {
     return {
-        patterns: state.conwayReducer.patterns,
+        patterns: state.patterns,
     };
 }
 

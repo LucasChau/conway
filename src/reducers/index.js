@@ -1,10 +1,8 @@
-import * as reducers from '.'
-import conwayReducer from './conway'
+import cells from './cells/reducer'
+import patterns from './patterns/reducer'
 import { combineReducers } from 'redux'
 
-// const rootReducer = combineReducers({
-//   ...reducers
-// })
 export default combineReducers({
-  conwayReducer,
+  cells,
+  patterns,
 });

@@ -22,7 +22,7 @@ const PatternMenu = ({patterns, onClickPattern}) => (
 )
 
 PatternMenu.prototype = {
-    patterns: PropTypes.object,
+    patterns: PropTypes.shape(PropTypes.shape()),
     onClickPattern: PropTypes.func.isRequired,
 }
 
